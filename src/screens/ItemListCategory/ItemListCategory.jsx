@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FlatList, View } from "react-native";
 import products from "../../data/products.json";
 import Search from "../../components/Search/Search";

@@ -1,5 +1,5 @@
 import { Button, Image, Text, View, useWindowDimensions } from "react-native";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import allProducts from "../../data/products.json";
 import { styles } from "./ItemDetail.styles";
 

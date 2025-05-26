@@ -1,5 +1,4 @@
 import { Text, View, useWindowDimensions } from "react-native";
-import React from "react";
 import { styles } from "./Header.styles";
 
 const Header = ({ title }) => {

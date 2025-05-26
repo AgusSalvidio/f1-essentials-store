@@ -1,4 +1,3 @@
-import React from "react";
 import { FlatList, View } from "react-native";
 import categories from "../../data/categories.json";
 import Categories from "../../components/Categories/Categories";

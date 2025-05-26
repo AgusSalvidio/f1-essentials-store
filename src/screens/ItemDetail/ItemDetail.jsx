@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 import allProducts from "../../data/products.json";
 import { styles } from "./ItemDetail.styles";
 
-const ItemDetail = ({ idSelected = "", setProductSelected = () => {} }) => {
+const ItemDetail = ({ route, navigation }) => {
   const [product, setProduct] = useState(null);
   const [orientation, setOrientation] = useState("portrait");
   const { width, height } = useWindowDimensions();
+  const { productId: idSelected } = route.params;
 
   useEffect(() => {
     if (width > height) setOrientation("landscape");
@@ -27,7 +28,7 @@ const ItemDetail = ({ idSelected = "", setProductSelected = () => {} }) => {
         <Button
           title="Volver"
           color="red"
-          onPress={() => setProductSelected("")}
+          onPress={() => navigation.goBack()}
         />
       </View>
       {product ? (

@@ -1,16 +1,16 @@
 import { FlatList, View } from "react-native";
 import categories from "../../data/categories.json";
-import Categories from "../../components/Categories/Categories";
+import CategoryItem from "../../components/CategoryItem/CategoryItem";
 import { styles } from "./Home.styles";
 
-const Home = ({ setCategorySelected }) => {
+const Home = ({ route, navigation }) => {
   return (
     <View style={styles.flatListContainer}>
       <FlatList
         showsVerticalScrollIndicator={false}
         data={categories.sort()}
         renderItem={({ item }) => (
-          <Categories category={item} selectCategory={setCategorySelected} />
+          <CategoryItem category={item} navigation={navigation} />
         )}
         keyExtractor={(itemElement) => itemElement}
         numColumns={2}

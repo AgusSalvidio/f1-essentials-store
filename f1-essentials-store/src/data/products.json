@@ -1,0 +1,202 @@
+[
+  {
+    "id": 1,
+    "title": "Red Bull Racing Team T-Shirt",
+    "description": "Official Red Bull Racing team shirt featuring performance fabric and modern fit. Ideal for fans and motorsport enthusiasts.",
+    "category": "shirt",
+    "price": 59.99,
+    "stock": {
+      "S": 12,
+      "M": 15,
+      "L": 10,
+      "XL": 8
+    },
+    "brand": "Puma",
+    "team": "Red Bull Racing",
+    "images": [
+      "https://images.footballfanatics.com/red-bull-racing/red-bull-racing-2025-team-set-up-t-shirt_ss5_p-201493637+u-zcrjb8qxo0imqc69ik1y+v-ihj5khl6e8blltwmuwrk.jpg?_hv=2&w=400",
+      "...",
+      "..."
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Mercedes-AMG Petronas Hoodie",
+    "description": "Comfortable and stylish hoodie featuring the iconic Mercedes-AMG Petronas branding. A must-have for fans.",
+    "category": "hoodie",
+    "price": 84.99,
+    "stock": {
+      "S": 9,
+      "M": 14,
+      "L": 11,
+      "XL": 7
+    },
+    "brand": "Puma",
+    "team": "Mercedes-AMG Petronas",
+    "images": [
+      "https://images.footballfanatics.com/mercedes-amg-petronas-f1-team/mercedes-amg-petronas-adidas-f1-2025-team-hoodie-black-kids_ss5_p-202358972+u-oiem3jtclh1xmxtrune0+v-n5ne2tfadullniaibw8i.jpg?_hv=2&w=400",
+      "...",
+      "..."
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Ferrari Team Polo",
+    "description": "Elegant Scuderia Ferrari polo shirt with official logos and Italian design flair. Perfect for any F1 occasion.",
+    "category": "polo",
+    "price": 74.99,
+    "stock": {
+      "S": 10,
+      "M": 13,
+      "L": 12,
+      "XL": 9
+    },
+    "brand": "Puma",
+    "team": "Scuderia Ferrari",
+    "images": [
+      "https://images.footballfanatics.com/scuderia-ferrari/scuderia-ferrari-2025-team-polo_ss5_p-202358990+u-fxubrg39xsm67kgvnyw5+v-r1luv8cfuh1ln50ekeck.jpg?_hv=2&w=400",
+      "...",
+      "..."
+    ]
+  },
+  {
+    "id": 4,
+    "title": "McLaren Team Cap",
+    "description": "Lightweight and adjustable cap with McLaren team colors and sponsor details. Great for sunny race days.",
+    "category": "cap",
+    "price": 34.99,
+    "stock": {
+      "S": 0,
+      "M": 0,
+      "L": 0,
+      "XL": 0
+    },
+    "brand": "Castore",
+    "team": "McLaren",
+    "images": [
+      "https://images.footballfanatics.com/mclaren-f1-team/mclaren-new-era-lando-norris-9fifty-pre-curved-cap-papaya_ss5_p-202169064+u-zeinjee4oxaefietklv6+v-dnguauzy1q4jsytk6obg.jpg?_hv=2&w=400",
+      "...",
+      "..."
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Aston Martin F1 Sweatshirt",
+    "description": "Stylish sweatshirt with the Aston Martin Aramco team crest. Ideal for layering and everyday wear.",
+    "category": "sweatshirt",
+    "price": 79.99,
+    "stock": {
+      "S": 8,
+      "M": 10,
+      "L": 10,
+      "XL": 6
+    },
+    "brand": "Castore",
+    "team": "Aston Martin Aramco",
+    "images": [
+      "https://images.footballfanatics.com/aston-martin/aston-martin-aramco-cognizant-f1-2025-team-driver-hoodie_ss5_p-202359055+u-spuryzpjhhbcakfhzgyf+v-iytfmxpjxfgjdofmqxyr.jpg?_hv=2&w=400",
+      "...",
+      "..."
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Alpine Team Jacket",
+    "description": "Durable and sleek team jacket used by the BWT Alpine F1 Team. Great for cold-weather support.",
+    "category": "jacket",
+    "price": 129.99,
+    "stock": {
+      "S": 5,
+      "M": 8,
+      "L": 6,
+      "XL": 4
+    },
+    "brand": "Kappa",
+    "team": "BWT Alpine F1 Team",
+    "images": [
+      "https://images.footballfanatics.com/alpine/alpine-f1-team-2025-softshell-jacket_ss5_p-201494920+u-uqxnqfv6aykqdvzxydqr+v-hdxduepohaaewekf2der.jpg?_hv=2&w=400",
+      "...",
+      "..."
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Williams Racing T-Shirt",
+    "description": "Official team shirt of Williams Racing with minimalist style and breathable material.",
+    "category": "shirt",
+    "price": 49.99,
+    "stock": {
+      "S": 11,
+      "M": 13,
+      "L": 9,
+      "XL": 7
+    },
+    "brand": "Puma",
+    "team": "Williams Racing",
+    "images": [
+      "https://images.footballfanatics.com/williams-racing/williams-racing-2025-team-t-shirt-navy_ss5_p-202359068+u-rach9gqancpqydm96ktl+v-rrqz9sycdowndjfy00cl.jpg?_hv=2&w=400",
+      "...",
+      "..."
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Stake F1 Team Hoodie",
+    "description": "Premium hoodie from the Stake F1 Team with modern fit and soft interior fleece lining.",
+    "category": "hoodie",
+    "price": 69.99,
+    "stock": {
+      "S": 7,
+      "M": 12,
+      "L": 9,
+      "XL": 6
+    },
+    "brand": "Alpinestars",
+    "team": "Stake F1 Team Kick Sauber",
+    "images": [
+      "https://images.footballfanatics.com/kick-sauber/stake-sauber-f1-team-2025-team-quarter-zip-sweat_ss5_p-202596058+u-ainjenyktphsbslaxccv+v-oem9rjifxhwabloqr3wp.jpg?_hv=2&w=400",
+      "...",
+      "..."
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Visa Cash App RB Polo Shirt",
+    "description": "Official RB polo shirt with clean lines and sponsor branding, worn by team personnel during race weekends.",
+    "category": "polo",
+    "price": 64.99,
+    "stock": {
+      "S": 10,
+      "M": 11,
+      "L": 9,
+      "XL": 5
+    },
+    "brand": "AlphaTauri",
+    "team": "Visa Cash App RB",
+    "images": [
+      "https://images.footballfanatics.com/vcarb/rb-cash-app-2024-team-polo-womens_ss5_p-201289648+u-xzi9ep1drhkmtozpg0jm+v-iwmymngaicadka3qj75g.jpg?_hv=2&w=400",
+      "...",
+      "..."
+    ]
+  },
+  {
+    "id": 10,
+    "title": "Haas F1 Team Softshell Jacket",
+    "description": "Protective and stylish softshell jacket from the MoneyGram Haas F1 Team. Perfect for windy conditions.",
+    "category": "jacket",
+    "price": 99.99,
+    "stock": {
+      "S": 6,
+      "M": 10,
+      "L": 8,
+      "XL": 5
+    },
+    "brand": "Under Armour",
+    "team": "MoneyGram Haas F1 Team",
+    "images": [
+      "https://images.footballfanatics.com/haas-f1-team/haas-f1-moneygram-2025-team-lightweight-raincoat_ss5_p-202620510+u-afrej85xodtjkit3v4fd+v-yivuxkvwdbeeb7wutsp8.jpg?_hv=2&w=400",
+      "...",
+      "..."
+    ]
+  }
+]

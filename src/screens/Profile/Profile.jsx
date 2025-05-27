@@ -10,6 +10,13 @@ const Profile = ({ navigation }) => {
   const launchCamera = () => {
     navigation.navigate("ImageSelectorScreen");
   };
+
+  const launchLocation = () => {
+    navigation.navigate("ListAddressScreen");
+  };
+
+  const signOut = () => {};
+
   const defaultImage = "../../../assets/images/defaultProfile.png";
 
   return (
@@ -32,6 +39,8 @@ const Profile = ({ navigation }) => {
         title="Agregar foto de perfil"
         onPress={launchCamera}
       />
+      <Button color="red" title="Mi dirección" onPress={launchLocation} />
+      <Button color="red" title="Cerrar Sesión" onPress={signOut} />
     </View>
   );
 };

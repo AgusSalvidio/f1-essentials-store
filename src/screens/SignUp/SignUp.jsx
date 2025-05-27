@@ -46,7 +46,7 @@ const SignUp = ({ navigation }) => {
         case "email":
           setErrorMail(err.message);
           break;
-        case "pasword":
+        case "password":
           setErrorPassword(err.message);
           break;
       }

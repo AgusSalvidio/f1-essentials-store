@@ -10,4 +10,6 @@ const requireEnv = (key) => {
 
 export const configurationProvider = {
   databaseUrl: requireEnv("EXPO_PUBLIC_FIREBASE_DATABASE_URL"),
+  apiKey: requireEnv("EXPO_PUBLIC_FIREBASE_API_KEY"),
+  authUrl: requireEnv("EXPO_PUBLIC_FIREBASE_AUTH_URL"),
 };

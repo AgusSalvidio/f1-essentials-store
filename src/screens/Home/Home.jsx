@@ -1,16 +1,15 @@
 import { FlatList, View } from "react-native";
-import categories from "../../data/categories.json";
 import CategoryItem from "../../components/CategoryItem/CategoryItem";
 import { styles } from "./Home.styles";
-import Counter from "../../components/Counter/Counter";
+import { useGetCategoriesQuery } from "../../services/shopServices";
 
 const Home = ({ route, navigation }) => {
+  const { data: categories } = useGetCategoriesQuery();
   return (
     <View style={styles.flatListContainer}>
-      <Counter />
       <FlatList
         showsVerticalScrollIndicator={false}
-        data={categories.sort()}
+        data={categories}
         renderItem={({ item }) => (
           <CategoryItem category={item} navigation={navigation} />
         )}

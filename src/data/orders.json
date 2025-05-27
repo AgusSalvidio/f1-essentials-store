@@ -1,0 +1,51 @@
+[
+  {
+    "id": 1,
+    "userId": 2,
+    "createdAt": 1679869276580,
+    "items": [
+      {
+        "id": 1,
+        "title": "Red Bull Racing Team T-Shirt",
+        "description": "Official Red Bull Racing team shirt featuring performance fabric and modern fit. Ideal for fans and motorsport enthusiasts.",
+        "category": "shirt",
+        "price": 59.99,
+        "stock": {
+          "S": 12,
+          "M": 15,
+          "L": 10,
+          "XL": 8
+        },
+        "brand": "Puma",
+        "team": "Red Bull Racing",
+        "images": [
+          "https://images.footballfanatics.com/red-bull-racing/red-bull-racing-2025-team-set-up-t-shirt_ss5_p-201493637+u-zcrjb8qxo0imqc69ik1y+v-ihj5khl6e8blltwmuwrk.jpg?_hv=2&w=400",
+          "...",
+          "..."
+        ],
+        "quantity": 1
+      },
+      {
+        "id": 2,
+        "title": "Mercedes-AMG Petronas Hoodie",
+        "description": "Comfortable and stylish hoodie featuring the iconic Mercedes-AMG Petronas branding. A must-have for fans.",
+        "category": "hoodie",
+        "price": 84.99,
+        "stock": {
+          "S": 9,
+          "M": 14,
+          "L": 11,
+          "XL": 7
+        },
+        "brand": "Puma",
+        "team": "Mercedes-AMG Petronas",
+        "images": [
+          "https://images.footballfanatics.com/mercedes-amg-petronas-f1-team/mercedes-amg-petronas-adidas-f1-2025-team-hoodie-black-kids_ss5_p-202358972+u-oiem3jtclh1xmxtrune0+v-n5ne2tfadullniaibw8i.jpg?_hv=2&w=400",
+          "...",
+          "..."
+        ],
+        "quantity": 2
+      }
+    ]
+  }
+]

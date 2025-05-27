@@ -8,8 +8,11 @@ import { colors } from "../../global/colors";
 
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import CartStackNavigator from "../CartStackNavigator/CartStackNavigator";
 import OrderStackNavigator from "../OrderStackNavigator/OrderStackNavigator";
+import ProfileStackNavigator from "../ProfileStackNavigator/ProfileStackNavigator";
+
 import { styles } from "./BottomTabNavigator.styles";
 
 const Tab = createBottomTabNavigator();
@@ -66,6 +69,23 @@ const BottomTabNavigator = () => {
               <View>
                 <Entypo
                   name="menu"
+                  size={24}
+                  color={focused ? colors.primary : colors.greyText}
+                />
+              </View>
+            );
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileStackNavigator}
+        options={{
+          tabBarIcon: ({ focused }) => {
+            return (
+              <View>
+                <Ionicons
+                  name="person-circle"
                   size={24}
                   color={focused ? colors.primary : colors.greyText}
                 />

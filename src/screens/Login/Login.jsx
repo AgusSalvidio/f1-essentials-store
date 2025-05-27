@@ -19,6 +19,7 @@ const LoginScreen = ({ navigation }) => {
         setUser({
           email: result.data.email,
           idToken: result.data.idToken,
+          localId: result.data.localId,
         })
       );
     }
@@ -31,7 +32,7 @@ const LoginScreen = ({ navigation }) => {
   return (
     <View style={styles.main}>
       <View style={styles.container}>
-        <Text style={styles.title}>Login</Text>
+        <Text style={styles.title}>Inicio de Sesión</Text>
         <InputForm label={"Email"} onChange={setEmail} error={""} />
         <InputForm
           label={"Contraseña"}

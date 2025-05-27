@@ -4,7 +4,9 @@ import { configurationProvider } from "../config/configurationProvider";
 const { databaseUrl } = configurationProvider;
 
 export const shopApi = createApi({
+  reducerPath: "shopApi",
   baseQuery: fetchBaseQuery({ baseUrl: databaseUrl }),
+  tagTypes: ["profileImageGet"],
   endpoints: (builder) => ({
     getCategories: builder.query({
       query: () => "categories.json",
@@ -25,6 +27,21 @@ export const shopApi = createApi({
         return null;
       },
     }),
+    postOrder: builder.mutation({}),
+    getProfileImage: builder.query({
+      query: (localId) => `profileImages/${localId}.json`,
+      providesTags: ["profileImageGet"],
+    }),
+    postProfileImage: builder.mutation({
+      query: ({ image, localId }) => ({
+        url: `profileImages/${localId}.json`,
+        method: "PUT",
+        body: {
+          image: image,
+        },
+      }),
+      invalidatesTags: ["profileImageGet"],
+    }),
   }),
 });
 
@@ -32,4 +49,7 @@ export const {
   useGetCategoriesQuery,
   useGetProductsByCategoryQuery,
   useGetProductByIdQuery,
+  usePostOrderMutation,
+  useGetProfileImageQuery,
+  usePostProfileImageMutation,
 } = shopApi;

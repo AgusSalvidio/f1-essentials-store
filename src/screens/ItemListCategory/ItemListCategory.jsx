@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { FlatList, View } from "react-native";
-import products from "../../data/products.json";
 import Search from "../../components/Search/Search";
 import ProductItem from "../../components/ProductItem/ProductItem";
+import { useGetProductsByCategoryQuery } from "../../services/shopServices";
 
 const ItemListCategory = ({ navigation, route }) => {
   const [keyWord, setKeyword] = useState("");
@@ -11,22 +11,29 @@ const ItemListCategory = ({ navigation, route }) => {
 
   const { category: categorySelected } = route.params;
 
+  const {
+    data: productFetched,
+    error: errorFromFetch,
+    isLoading,
+  } = useGetProductsByCategoryQuery(categorySelected);
+
   useEffect(() => {
     const regex = /\d/;
     const hasDigits = regex.test(keyWord);
+
     if (hasDigits) {
       setError("No se permiten numeros");
       return;
     }
-    const productsPrefiltered = products.filter(
-      (product) => product.category === categorySelected
-    );
-    const productsFilter = productsPrefiltered.filter((product) =>
-      product.title.toLocaleLowerCase().includes(keyWord.toLocaleLowerCase())
-    );
-    setProductsFiltered(productsFilter);
-    setError("");
-  }, [keyWord, categorySelected]);
+
+    if (!isLoading) {
+      const productsFilter = productFetched.filter((product) =>
+        product.title.toLocaleLowerCase().includes(keyWord.toLocaleLowerCase())
+      );
+      setProductsFiltered(productsFilter);
+      setError("");
+    }
+  }, [keyWord, categorySelected, productFetched, isLoading]);
 
   return (
     <View>

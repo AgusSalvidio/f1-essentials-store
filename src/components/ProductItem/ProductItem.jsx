@@ -1,16 +1,18 @@
 import { Image, Pressable, Text } from "react-native";
 import Card from "../Card/Card";
 import { styles } from "./ProductItem.styles";
-
+import { useDispatch } from "react-redux";
 const ProductItem = ({ product, navigation }) => {
+  const dispatch = useDispatch();
+
+  const goToItemDetail = () => {
+    dispatch(setIdSelected(product.title));
+    navigation.navigate("ItemDetail", { productId: product.id });
+  };
+
   return (
     <Card style={styles.additionalStylesCard}>
-      <Pressable
-        style={styles.pressable}
-        onPress={() =>
-          navigation.navigate("ItemDetail", { productId: product.id })
-        }
-      >
+      <Pressable style={styles.pressable} onPress={() => goToItemDetail}>
         <Text style={styles.textCategory}>{product.title}</Text>
         <Image
           resizeMode="cover"

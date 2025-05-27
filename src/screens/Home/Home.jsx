@@ -2,10 +2,12 @@ import { FlatList, View } from "react-native";
 import categories from "../../data/categories.json";
 import CategoryItem from "../../components/CategoryItem/CategoryItem";
 import { styles } from "./Home.styles";
+import Counter from "../../components/Counter/Counter";
 
 const Home = ({ route, navigation }) => {
   return (
     <View style={styles.flatListContainer}>
+      <Counter />
       <FlatList
         showsVerticalScrollIndicator={false}
         data={categories.sort()}

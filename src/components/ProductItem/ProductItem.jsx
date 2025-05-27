@@ -1,14 +1,15 @@
 import { Image, Pressable, Text } from "react-native";
-import React from "react";
 import Card from "../Card/Card";
 import { styles } from "./ProductItem.styles";
 
-const ProductItem = ({ product, setItemIdSelected = () => {} }) => {
+const ProductItem = ({ product, navigation }) => {
   return (
     <Card style={styles.additionalStylesCard}>
       <Pressable
         style={styles.pressable}
-        onPress={() => setItemIdSelected(product.id)}
+        onPress={() =>
+          navigation.navigate("ItemDetail", { productId: product.id })
+        }
       >
         <Text style={styles.textCategory}>{product.title}</Text>
         <Image

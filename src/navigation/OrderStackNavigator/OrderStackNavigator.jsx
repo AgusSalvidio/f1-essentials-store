@@ -11,7 +11,7 @@ const OrderStackNavigator = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="Orders" component={Orders} />
+      <Stack.Screen name="OrdersScreen" component={Orders} />
     </Stack.Navigator>
   );
 };

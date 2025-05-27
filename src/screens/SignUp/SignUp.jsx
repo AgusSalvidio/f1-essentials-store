@@ -28,6 +28,7 @@ const SignUp = ({ navigation }) => {
         setUser({
           email: result.data.email,
           idToken: result.data.idToken,
+          localId: result.data.localId,
         })
       );
     }
@@ -56,7 +57,7 @@ const SignUp = ({ navigation }) => {
   return (
     <View style={styles.main}>
       <View style={styles.container}>
-        <Text style={styles.title}>Signup</Text>
+        <Text style={styles.title}>Registrarse</Text>
         <InputForm label={"Email"} onChange={setEmail} error={errorMail} />
         <InputForm
           label={"Contraseña"}

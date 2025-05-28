@@ -1,58 +1,66 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const calculateTotal = (items) => {
+  return items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+};
+
+const getTimestamp = () => new Date().toLocaleString();
+
 export const cartSlice = createSlice({
   name: "cart",
   initialState: {
     value: {
       user: "userIdLoggedIn",
-      updatedAt: new Date().toLocaleString(),
+      updatedAt: getTimestamp(),
       total: 0,
       items: [],
     },
   },
   reducers: {
     addCartItem: (state, { payload }) => {
-      const productRepeated = state.value.items.find(
-        (item) => item.id === payload.id
-      );
-      if (productRepeated) {
-        const itemsUpdated = state.value.items.map((item) => {
-          if (item.id === payload.id) {
-            item.quantity += payload.quantity;
-            return item;
-          }
-          return item;
-        });
-        const total = itemsUpdated.reduce(
-          (acc, currentItem) =>
-            (acc += currentItem.price * currentItem.quantity),
-          0
-        );
+      const { id, quantity } = payload;
 
-        state.value = {
-          ...state.value,
-          items: itemsUpdated,
-          total,
-          updatedAt: new Date().toLocaleString(),
-        };
-      } else {
-        state.value.items.push(payload);
-        const total = state.value.items.reduce(
-          (acc, currentItem) =>
-            (acc += currentItem.price * currentItem.quantity),
-          0
+      const existingItemIndex = state.value.items.findIndex(
+        (item) => item.id === id
+      );
+
+      let updatedItems;
+
+      if (existingItemIndex !== -1) {
+        updatedItems = state.value.items.map((item, index) =>
+          index === existingItemIndex
+            ? { ...item, quantity: item.quantity + quantity }
+            : item
         );
-        state.value = {
-          ...state.value,
-          total,
-          updatedAt: new Date().toLocaleString(),
-        };
+      } else {
+        updatedItems = [...state.value.items, payload];
       }
+
+      state.value = {
+        ...state.value,
+        items: updatedItems,
+        total: calculateTotal(updatedItems),
+        updatedAt: getTimestamp(),
+      };
     },
-    removeCartItem: () => {},
+
+    removeCartItem: (state, { payload }) => {
+      const updatedItems = state.value.items.filter(
+        (item) => item.id !== payload.id
+      );
+
+      state.value = {
+        ...state.value,
+        items: updatedItems,
+        total: calculateTotal(updatedItems),
+        updatedAt: getTimestamp(),
+      };
+    },
+
     clearCart: (state) => {
       state.value.items = [];
       state.value.total = 0;
+      state.value.updatedAt = getTimestamp();
     },
   },
 });

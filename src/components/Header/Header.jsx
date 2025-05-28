@@ -1,13 +1,24 @@
-import { Text, View, useWindowDimensions } from "react-native";
+import { Image, Pressable, View } from "react-native";
 import { styles } from "./Header.styles";
+import { useNavigation } from "@react-navigation/native";
+import { Entypo } from "@expo/vector-icons";
 
-const Header = ({ route }) => {
-  const { height, width } = useWindowDimensions();
+const Header = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
-      <Text style={width > 360 ? styles.text : styles.textSm}>
-        {route.name}
-      </Text>
+      <Image
+        source={require("../../../assets/icon.png")}
+        style={styles.logo}
+        resizeMode="contain"
+      />
+      <Pressable
+        style={styles.profileButton}
+        onPress={() => navigation.navigate("Profile")}
+      >
+        <Entypo name="user" size={28} color="white" />
+      </Pressable>
     </View>
   );
 };

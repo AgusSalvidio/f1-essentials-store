@@ -1,11 +1,4 @@
-import {
-  Button,
-  Text,
-  View,
-  Image,
-  ActivityIndicator,
-  Alert,
-} from "react-native";
+import { Button, Text, View, Image, ActivityIndicator } from "react-native";
 import { useState } from "react";
 import * as ImagePicker from "expo-image-picker";
 
@@ -13,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCameraImage } from "../../features/User/userSlice";
 import { usePostProfileImageMutation } from "../../services/shopServices";
 import { styles } from "./ImageSelector.styles";
+
+import { showAlert } from "../../utils/alerts";
 
 const ImageSelector = ({ navigation }) => {
   const [image, setImage] = useState(null);
@@ -30,7 +25,7 @@ const ImageSelector = ({ navigation }) => {
     try {
       const permissionCamera = await verifyCameraPermissions();
       if (!permissionCamera) {
-        Alert.alert(
+        showAlert(
           "Permiso denegado",
           "Necesitamos acceso a la cámara para tomar fotos."
         );
@@ -50,7 +45,7 @@ const ImageSelector = ({ navigation }) => {
       }
     } catch (error) {
       console.log(error);
-      Alert.alert("Error", "Ocurrió un error al tomar la foto.");
+      showAlert("Error", "Ocurrió un error al tomar la foto.");
     }
   };
 
@@ -70,7 +65,7 @@ const ImageSelector = ({ navigation }) => {
       }
     } catch (error) {
       console.log(error);
-      Alert.alert("Error", "Ocurrió un error al seleccionar la foto.");
+      showAlert("Error", "Ocurrió un error al seleccionar la foto.");
     }
   };
 
@@ -81,12 +76,12 @@ const ImageSelector = ({ navigation }) => {
       dispatch(setCameraImage(image));
       const response = await triggerPostImage({ image, localId }).unwrap();
       setLoading(false);
-      Alert.alert("Éxito", "Foto subida correctamente.");
+      showAlert("Éxito", "Foto subida correctamente.");
       navigation.goBack();
     } catch (error) {
       setLoading(false);
       console.log(error);
-      Alert.alert("Error", "No se pudo subir la foto. Intenta nuevamente.");
+      showAlert("Error", "No se pudo subir la foto. Intenta nuevamente.");
     }
   };
 

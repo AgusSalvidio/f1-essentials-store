@@ -1,4 +1,4 @@
-import { Text, View, Pressable, TextInput, Alert } from "react-native";
+import { Text, View, Pressable, TextInput } from "react-native";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -9,6 +9,8 @@ import {
 } from "../../features/Counter/counterSlice";
 import { styles } from "./Counter.styles";
 
+import { showAlert } from "../../utils/alerts";
+
 const Counter = () => {
   const count = useSelector((state) => state.counter.value);
   const dispatch = useDispatch();
@@ -18,7 +20,7 @@ const Counter = () => {
   const incrementCounter = () => {
     const value = Number(inputToAdd);
     if (isNaN(value) || value <= 0) {
-      Alert.alert("Entrada inválida", "Por favor ingresa un número mayor a 0.");
+      showAlert("Entrada inválida", "Por favor ingresa un número mayor a 0.");
       return;
     }
     dispatch(incrementByAmount(value));

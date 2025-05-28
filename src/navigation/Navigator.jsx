@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Alert, View, ActivityIndicator } from "react-native";
+import { View, ActivityIndicator } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import BottomTabNavigator from "./BottomTabNavigator/BottomTabNavigator";
 import AuthStackNavigator from "./AuthStackNavigator/AuthStackNavigator";
@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useSession } from "../hooks/useSession";
 import { setUser } from "../features/User/userSlice";
 import { styles } from "./Navigator.styles";
+
+import { showAlert } from "../utils/alerts";
 
 const Navigator = () => {
   const dispatch = useDispatch();
@@ -29,7 +31,7 @@ const Navigator = () => {
         );
       }
     } catch (error) {
-      Alert.alert(
+      showAlert(
         "Error",
         "No se pudo recuperar la sesión. Intenta nuevamente más tarde."
       );

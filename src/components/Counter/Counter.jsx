@@ -1,4 +1,4 @@
-import { Text, View, Pressable, TextInput } from "react-native";
+import { Text, View, Pressable, TextInput, Alert } from "react-native";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -16,33 +16,64 @@ const Counter = () => {
   const [inputToAdd, setInputToAdd] = useState("");
 
   const incrementCounter = () => {
-    dispatch(incrementByAmount(Number(inputToAdd)));
+    const value = Number(inputToAdd);
+    if (isNaN(value) || value <= 0) {
+      Alert.alert("Entrada inválida", "Por favor ingresa un número mayor a 0.");
+      return;
+    }
+    dispatch(incrementByAmount(value));
     setInputToAdd("");
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.buttonsContainer}>
-        <Pressable style={styles.button} onPress={() => dispatch(decrement())}>
+        <Pressable
+          style={({ pressed }) => [styles.button, pressed && { opacity: 0.7 }]}
+          onPress={() => dispatch(decrement())}
+          accessibilityRole="button"
+          accessibilityLabel="Decrementar contador"
+        >
           <Text style={styles.buttonText}>-</Text>
         </Pressable>
+
         <Text style={styles.span}>{count}</Text>
-        <Pressable style={styles.button} onPress={() => dispatch(increment())}>
+
+        <Pressable
+          style={({ pressed }) => [styles.button, pressed && { opacity: 0.7 }]}
+          onPress={() => dispatch(increment())}
+          accessibilityRole="button"
+          accessibilityLabel="Incrementar contador"
+        >
           <Text style={styles.buttonText}>+</Text>
         </Pressable>
       </View>
+
       <View style={styles.buttonsContainer}>
         <TextInput
           placeholder="Cantidad a aumentar"
           style={styles.spanInput}
           value={inputToAdd}
           onChangeText={setInputToAdd}
+          keyboardType="numeric"
+          accessibilityLabel="Cantidad a aumentar"
         />
-        <Pressable style={styles.button} onPress={() => incrementCounter()}>
+        <Pressable
+          style={({ pressed }) => [styles.button, pressed && { opacity: 0.7 }]}
+          onPress={incrementCounter}
+          accessibilityRole="button"
+          accessibilityLabel="Agregar cantidad al contador"
+        >
           <Text style={styles.buttonText}>Add</Text>
         </Pressable>
       </View>
-      <Pressable style={styles.button} onPress={() => dispatch(reset())}>
+
+      <Pressable
+        style={({ pressed }) => [styles.button, pressed && { opacity: 0.7 }]}
+        onPress={() => dispatch(reset())}
+        accessibilityRole="button"
+        accessibilityLabel="Reiniciar contador"
+      >
         <Text style={styles.buttonText}>Reset</Text>
       </Pressable>
     </View>

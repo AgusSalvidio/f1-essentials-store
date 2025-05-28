@@ -7,6 +7,17 @@ import { styles } from "./Search.styles";
 
 const Search = ({ onSearch = () => {}, error = "", goBack = () => {} }) => {
   const [keyword, setKeyword] = useState("");
+
+  const handleSearch = () => {
+    if (keyword.trim() !== "") {
+      onSearch(keyword.trim());
+    }
+  };
+
+  const handleClear = () => {
+    setKeyword("");
+  };
+
   return (
     <View style={styles.container}>
       <TextInput
@@ -14,17 +25,34 @@ const Search = ({ onSearch = () => {}, error = "", goBack = () => {} }) => {
         placeholder="Search..."
         value={keyword}
         onChangeText={setKeyword}
+        returnKeyType="search"
+        onSubmitEditing={handleSearch}
+        clearButtonMode="while-editing"
+        autoCorrect={false}
       />
-      <Pressable onPress={() => onSearch(keyword)}>
+      <Pressable
+        onPress={handleSearch}
+        android_ripple={{ color: "#ccc", borderless: true }}
+        accessibilityLabel="Buscar"
+      >
         <FontAwesome name="search" size={24} color="black" />
       </Pressable>
-      <Pressable onPress={() => setKeyword("")}>
+      <Pressable
+        onPress={handleClear}
+        android_ripple={{ color: "#ccc", borderless: true }}
+        accessibilityLabel="Limpiar búsqueda"
+      >
         <FontAwesome5 name="eraser" size={24} color="black" />
       </Pressable>
-      <Pressable onPress={goBack}>
+      <Pressable
+        onPress={goBack}
+        android_ripple={{ color: "#ccc", borderless: true }}
+        accessibilityLabel="Volver"
+      >
         <AntDesign name="back" size={24} color="black" />
       </Pressable>
-      {error ? <Text style={{ color: "red" }}>{error}</Text> : null}
+
+      {error ? <Text style={styles.error}>{error}</Text> : null}
     </View>
   );
 };

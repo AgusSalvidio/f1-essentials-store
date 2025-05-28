@@ -17,4 +17,9 @@ export const styles = StyleSheet.create({
     color: colors.darkText,
     borderRadius: 10,
   },
+  error: {
+    color: "red",
+    fontSize: 14,
+    marginLeft: 10,
+  },
 });

@@ -12,4 +12,11 @@ export const styles = StyleSheet.create({
     height: 100,
     borderRadius: 50,
   },
+  errorText: {
+    color: "red",
+    marginTop: 8,
+    fontSize: 14,
+    fontFamily: "Inter",
+    textAlign: "center",
+  },
 });

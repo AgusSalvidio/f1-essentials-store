@@ -13,8 +13,8 @@ const CategoryItem = ({ category, navigation }) => {
   };
 
   return (
-    <Card style={{ marginVertical: 10, marginHorizontal: 10 }}>
-      <Pressable onPress={goToItemListCategory}>
+    <Card style={styles.card}>
+      <Pressable onPress={goToItemListCategory} style={styles.pressable}>
         <Text style={styles.text}>{category}</Text>
       </Pressable>
     </Card>

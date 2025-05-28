@@ -10,14 +10,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { styles } from "./Cart.styles";
 import CartItem from "../../components/CartItem/CartItem";
 import { usePostOrderMutation } from "../../services/shopServices";
-import { clearCart } from "../../features/Cart/cartSlice";
+import { clearCart, removeCartItem } from "../../features/Cart/cartSlice";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const { items: CartData, total } = useSelector((state) => state.cart.value);
   const { localId } = useSelector((state) => state.auth.value);
-  const [triggerPostOrder, { isLoading, isSuccess, isError }] =
-    usePostOrderMutation();
+  const [triggerPostOrder, { isLoading }] = usePostOrderMutation();
 
   const onConfirmOrder = async () => {
     try {
@@ -33,6 +32,21 @@ const Cart = () => {
     }
   };
 
+  const handleDeleteItem = (item) => {
+    Alert.alert(
+      "Eliminar producto",
+      `¿Estás seguro que querés eliminar "${item.title}" del carrito?`,
+      [
+        { text: "Cancelar", style: "cancel" },
+        {
+          text: "Eliminar",
+          style: "destructive",
+          onPress: () => dispatch(removeCartItem(item)),
+        },
+      ]
+    );
+  };
+
   if (!CartData.length) {
     return (
       <View style={styles.emptyContainer}>
@@ -45,8 +59,10 @@ const Cart = () => {
     <View style={styles.container}>
       <FlatList
         data={CartData}
-        keyExtractor={(product) => product.id}
-        renderItem={({ item }) => <CartItem cartItem={item} />}
+        keyExtractor={(product) => product.id.toString()}
+        renderItem={({ item }) => (
+          <CartItem cartItem={item} onDelete={() => handleDeleteItem(item)} />
+        )}
       />
       <View style={styles.totalContainer}>
         <Pressable

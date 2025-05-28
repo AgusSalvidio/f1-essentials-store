@@ -17,6 +17,9 @@ export const styles = StyleSheet.create({
   },
   textCategory: {
     color: colors.lighText,
+    flex: 1,
+    marginRight: 10,
+    fontSize: 16,
   },
   pressable: {
     width: "100%",

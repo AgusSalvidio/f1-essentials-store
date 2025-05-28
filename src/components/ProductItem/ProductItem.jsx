@@ -14,8 +14,18 @@ const ProductItem = ({ product, navigation }) => {
 
   return (
     <Card style={styles.additionalStylesCard}>
-      <Pressable style={styles.pressable} onPress={() => goToItemDetail()}>
-        <Text style={styles.textCategory}>{product.title}</Text>
+      <Pressable
+        style={styles.pressable}
+        onPress={goToItemDetail}
+        android_ripple={{ color: "#ccc" }}
+      >
+        <Text
+          style={styles.textCategory}
+          numberOfLines={2}
+          ellipsizeMode="tail"
+        >
+          {product.title}
+        </Text>
         <Image
           resizeMode="cover"
           style={styles.image}

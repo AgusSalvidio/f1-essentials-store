@@ -1,17 +1,16 @@
-import Cart from "../../screens/Cart/Cart";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Cart from "../../screens/Cart/Cart";
 
 const Stack = createNativeStackNavigator();
-const CartStackNavigator = () => {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen name="CartScreen" component={Cart} />
-    </Stack.Navigator>
-  );
+
+const screenOptions = {
+  headerShown: false,
 };
+
+const CartStackNavigator = () => (
+  <Stack.Navigator screenOptions={screenOptions}>
+    <Stack.Screen name="CartScreen" component={Cart} />
+  </Stack.Navigator>
+);
 
 export default CartStackNavigator;

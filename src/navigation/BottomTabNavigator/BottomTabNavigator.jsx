@@ -2,98 +2,64 @@ import { View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import HomeStackNavigator from "../HomeStackNavigator/HomeStackNavigator";
-
-import Header from "../../components/Header/Header";
-import { colors } from "../../global/colors";
-
-import AntDesign from "@expo/vector-icons/AntDesign";
-import Entypo from "@expo/vector-icons/Entypo";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import CartStackNavigator from "../CartStackNavigator/CartStackNavigator";
 import OrderStackNavigator from "../OrderStackNavigator/OrderStackNavigator";
 import ProfileStackNavigator from "../ProfileStackNavigator/ProfileStackNavigator";
 
+import Header from "../../components/Header/Header";
+import { colors } from "../../global/colors";
 import { styles } from "./BottomTabNavigator.styles";
 
+import AntDesign from "@expo/vector-icons/AntDesign";
+import Entypo from "@expo/vector-icons/Entypo";
+import Ionicons from "@expo/vector-icons/Ionicons";
+
 const Tab = createBottomTabNavigator();
+
+const tabIcons = {
+  HomeScreenNavigator: {
+    IconComponent: Entypo,
+    iconName: "home",
+  },
+  Cart: {
+    IconComponent: AntDesign,
+    iconName: "shoppingcart",
+  },
+  Orders: {
+    IconComponent: Entypo,
+    iconName: "menu",
+  },
+  Profile: {
+    IconComponent: Ionicons,
+    iconName: "person-circle",
+  },
+};
 
 const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        header: () => {
-          return <Header route={route} />;
-        },
+        header: () => <Header route={route} />,
         tabBarShowLabel: false,
         tabBarStyle: styles.tabBar,
-      })}
-    >
-      <Tab.Screen
-        name="HomeScreenNavigator"
-        component={HomeStackNavigator}
-        options={{
-          tabBarIcon: ({ focused }) => {
-            return (
-              <View>
-                <Entypo
-                  name="home"
-                  size={24}
-                  color={focused ? colors.primary : colors.greyText}
-                />
-              </View>
-            );
-          },
-        }}
-      />
-      <Tab.Screen
-        name="Cart"
-        component={CartStackNavigator}
-        options={{
-          tabBarIcon: ({ focused }) => (
+        tabBarIcon: ({ focused }) => {
+          const { IconComponent, iconName } = tabIcons[route.name];
+          return (
             <View>
-              <AntDesign
-                name="shoppingcart"
+              <IconComponent
+                name={iconName}
                 size={24}
                 color={focused ? colors.primary : colors.greyText}
               />
             </View>
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Orders"
-        component={OrderStackNavigator}
-        options={{
-          tabBarIcon: ({ focused }) => {
-            return (
-              <View>
-                <Entypo
-                  name="menu"
-                  size={24}
-                  color={focused ? colors.primary : colors.greyText}
-                />
-              </View>
-            );
-          },
-        }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={ProfileStackNavigator}
-        options={{
-          tabBarIcon: ({ focused }) => {
-            return (
-              <View>
-                <Ionicons
-                  name="person-circle"
-                  size={24}
-                  color={focused ? colors.primary : colors.greyText}
-                />
-              </View>
-            );
-          },
-        }}
-      />
+          );
+        },
+      })}
+    >
+      <Tab.Screen name="HomeScreenNavigator" component={HomeStackNavigator} />
+      <Tab.Screen name="Cart" component={CartStackNavigator} />
+      <Tab.Screen name="Orders" component={OrderStackNavigator} />
+      <Tab.Screen name="Profile" component={ProfileStackNavigator} />
     </Tab.Navigator>
   );
 };

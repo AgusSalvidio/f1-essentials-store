@@ -12,7 +12,6 @@ import { styles } from "./BottomTabNavigator.styles";
 
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";
-import Ionicons from "@expo/vector-icons/Ionicons";
 
 const Tab = createBottomTabNavigator();
 
@@ -28,10 +27,6 @@ const tabIcons = {
   Orders: {
     IconComponent: Entypo,
     iconName: "menu",
-  },
-  Profile: {
-    IconComponent: Ionicons,
-    iconName: "person-circle",
   },
 };
 
@@ -59,7 +54,15 @@ const BottomTabNavigator = () => {
       <Tab.Screen name="HomeScreenNavigator" component={HomeStackNavigator} />
       <Tab.Screen name="Cart" component={CartStackNavigator} />
       <Tab.Screen name="Orders" component={OrderStackNavigator} />
-      <Tab.Screen name="Profile" component={ProfileStackNavigator} />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileStackNavigator}
+        options={{
+          tabBarButton: () => null,
+          tabBarItemStyle: { display: "none" }, // Oculta el espacio en la tab bar
+          header: () => <Header />,
+        }}
+      />
     </Tab.Navigator>
   );
 };

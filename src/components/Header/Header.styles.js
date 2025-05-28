@@ -11,8 +11,8 @@ export const styles = StyleSheet.create({
     position: "relative",
   },
   logo: {
-    width: 50,
-    height: 50,
+    width: 70,
+    height: 70,
   },
   profileButton: {
     position: "absolute",

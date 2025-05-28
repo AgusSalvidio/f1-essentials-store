@@ -1,7 +1,8 @@
 import { Image, Pressable, View } from "react-native";
 import { styles } from "./Header.styles";
 import { useNavigation } from "@react-navigation/native";
-import { Entypo } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
+import { colors } from "../../global/colors";
 
 const Header = () => {
   const navigation = useNavigation();
@@ -9,7 +10,7 @@ const Header = () => {
   return (
     <View style={styles.container}>
       <Image
-        source={require("../../../assets/icon.png")}
+        source={require("../../../assets/white-icon.png")}
         style={styles.logo}
         resizeMode="contain"
       />
@@ -17,7 +18,7 @@ const Header = () => {
         style={styles.profileButton}
         onPress={() => navigation.navigate("Profile")}
       >
-        <Entypo name="user" size={28} color="white" />
+        <Ionicons name="person" size={28} color={colors.lighText} />
       </Pressable>
     </View>
   );

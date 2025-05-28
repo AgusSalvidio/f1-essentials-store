@@ -1,4 +1,4 @@
-import { Text, View, Pressable } from "react-native";
+import { Text, View, Pressable, ActivityIndicator } from "react-native";
 import { useEffect, useState } from "react";
 
 import InputForm from "../../components/InputForm/InputForm";
@@ -11,18 +11,28 @@ import { setUser } from "../../features/User/userSlice";
 import { styles } from "./SignUp.styles";
 
 const SignUp = ({ navigation }) => {
-  const [email, setEmail] = useState("");
-  const [errorMail, setErrorMail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errorPassword, setErrorPassword] = useState("");
-  const [confirmPassword, setconfirmPassword] = useState("");
-  const [errorConfirmPassword, setErrorConfirmPassword] = useState("");
-
   const dispatch = useDispatch();
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const [formErrors, setFormErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [apiError, setApiError] = useState("");
 
   const [triggerSignUp, result] = useSignUpMutation();
 
   useEffect(() => {
+    if (result.isLoading) {
+      setLoading(true);
+      setApiError("");
+    } else {
+      setLoading(false);
+    }
+
     if (result.isSuccess) {
       dispatch(
         setUser({
@@ -31,25 +41,43 @@ const SignUp = ({ navigation }) => {
           localId: result.data.localId,
         })
       );
+      setFormData({ email: "", password: "", confirmPassword: "" });
+      setFormErrors({});
     }
-  }, [result]);
+
+    if (result.isError) {
+      const message =
+        result.error?.data?.error?.message ||
+        "Error en el registro. Intenta de nuevo.";
+      setApiError(message);
+    }
+  }, [result, dispatch]);
+
+  const onChange = (field, value) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+    setFormErrors((prev) => ({ ...prev, [field]: "" }));
+    setApiError("");
+  };
 
   const onSubmit = () => {
     try {
-      setErrorMail("");
-      setErrorPassword("");
-      setErrorConfirmPassword("");
-      signupSchema.validateSync({ email, password, confirmPassword });
-      triggerSignUp({ email, password, returnSecureToken: true });
-    } catch (err) {
-      console.log(err);
-      switch (err.path) {
-        case "email":
-          setErrorMail(err.message);
-          break;
-        case "password":
-          setErrorPassword(err.message);
-          break;
+      setFormErrors({});
+      setApiError("");
+
+      signupSchema.validateSync(formData, { abortEarly: false });
+
+      triggerSignUp({
+        email: formData.email,
+        password: formData.password,
+        returnSecureToken: true,
+      });
+    } catch (validationErrors) {
+      if (validationErrors.inner) {
+        const errors = {};
+        validationErrors.inner.forEach((err) => {
+          errors[err.path] = err.message;
+        });
+        setFormErrors(errors);
       }
     }
   };
@@ -58,20 +86,38 @@ const SignUp = ({ navigation }) => {
     <View style={styles.main}>
       <View style={styles.container}>
         <Text style={styles.title}>Registrarse</Text>
-        <InputForm label={"Email"} onChange={setEmail} error={errorMail} />
+
         <InputForm
-          label={"Contraseña"}
-          onChange={setPassword}
-          error={errorPassword}
-          isSecure={true}
+          label="Email"
+          value={formData.email}
+          onChange={(text) => onChange("email", text)}
+          error={formErrors.email}
         />
+
         <InputForm
-          label={"Confirmar contraseña"}
-          onChange={setconfirmPassword}
-          error={errorConfirmPassword}
-          isSecure={true}
+          label="Contraseña"
+          value={formData.password}
+          onChange={(text) => onChange("password", text)}
+          error={formErrors.password}
+          isSecure
         />
-        <SubmitButton onPress={onSubmit} title="Registrarse" />
+
+        <InputForm
+          label="Confirmar contraseña"
+          value={formData.confirmPassword}
+          onChange={(text) => onChange("confirmPassword", text)}
+          error={formErrors.confirmPassword}
+          isSecure
+        />
+
+        {apiError ? <Text style={styles.apiError}>{apiError}</Text> : null}
+
+        <SubmitButton
+          onPress={onSubmit}
+          title={loading ? "Registrando..." : "Registrarse"}
+          disabled={loading}
+        />
+
         <Text style={styles.sub}>¿Ya tenés una cuenta?</Text>
         <Pressable onPress={() => navigation.navigate("LoginScreen")}>
           <Text style={styles.subLink}>Inicia Sesión</Text>

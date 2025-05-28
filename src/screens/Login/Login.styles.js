@@ -30,4 +30,12 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     color: "blue",
   },
+  apiError: {
+    color: "red",
+    fontFamily: "Inter",
+    fontSize: 14,
+    marginVertical: 5,
+    fontStyle: "italic",
+    textAlign: "center",
+  },
 });

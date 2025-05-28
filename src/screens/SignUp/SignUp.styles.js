@@ -32,4 +32,12 @@ export const styles = StyleSheet.create({
     fontFamily: "Inter",
     color: "blue",
   },
+  apiError: {
+    color: "red",
+    fontFamily: "Inter",
+    fontSize: 14,
+    marginVertical: 5,
+    fontStyle: "italic",
+    textAlign: "center",
+  },
 });

@@ -59,7 +59,7 @@ const BottomTabNavigator = () => {
         component={ProfileStackNavigator}
         options={{
           tabBarButton: () => null,
-          tabBarItemStyle: { display: "none" }, // Oculta el espacio en la tab bar
+          tabBarItemStyle: { display: "none" },
           header: () => <Header />,
         }}
       />

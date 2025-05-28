@@ -1,4 +1,4 @@
-import { Text, View, Pressable, ActivityIndicator } from "react-native";
+import { Text, View, Pressable, Image } from "react-native";
 import { useEffect, useState } from "react";
 
 import InputForm from "../../components/InputForm/InputForm";
@@ -85,6 +85,11 @@ const SignUp = ({ navigation }) => {
   return (
     <View style={styles.main}>
       <View style={styles.container}>
+        <Image
+          source={require("../../../assets/icon.png")}
+          style={styles.iconImage}
+          resizeMode="contain"
+        />
         <Text style={styles.title}>Registrarse</Text>
 
         <InputForm

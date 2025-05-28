@@ -1,4 +1,4 @@
-import { Text, View, Pressable } from "react-native";
+import { Text, View, Pressable, Image } from "react-native";
 import { useState, useEffect } from "react";
 import InputForm from "../../components/InputForm/InputForm";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
@@ -82,6 +82,13 @@ const LoginScreen = ({ navigation }) => {
   return (
     <View style={styles.main}>
       <View style={styles.container}>
+        <Image
+          source={require("../../../assets/icon.png")}
+          style={styles.icon}
+          resizeMode="contain"
+          accessible={true}
+          accessibilityLabel="Icono de la aplicación"
+        />
         <Text style={styles.title}>Inicio de Sesión</Text>
 
         <InputForm

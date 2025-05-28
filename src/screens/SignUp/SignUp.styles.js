@@ -18,18 +18,21 @@ export const styles = StyleSheet.create({
     paddingVertical: 20,
     borderRadius: 10,
   },
+  iconImage: {
+    width: 80,
+    height: 80,
+    marginBottom: 10,
+  },
   title: {
     fontSize: 22,
     fontFamily: "Inter",
   },
   sub: {
     fontSize: 14,
-    fontFamily: "Inter",
     color: "black",
   },
   subLink: {
     fontSize: 14,
-    fontFamily: "Inter",
     color: "blue",
   },
   apiError: {

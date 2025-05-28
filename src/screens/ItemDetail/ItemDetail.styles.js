@@ -1,50 +1,80 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../global/colors";
 
 export const styles = StyleSheet.create({
+  centered: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
   mainContainer: {
     flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "flex-start",
-    padding: 10,
+    justifyContent: "flex-start",
+    padding: 16,
+    gap: 16,
   },
   mainContainerLandscape: {
     flexDirection: "row",
-    justifyContent: "center",
+    padding: 16,
+    gap: 20,
     alignItems: "center",
-    padding: 10,
-    gap: 10,
   },
   image: {
     width: "100%",
     aspectRatio: 1,
+    borderRadius: 12,
   },
   imageLandscape: {
     width: "45%",
-    height: 200,
+    height: 220,
+    borderRadius: 12,
   },
-  textContainer: { flexDirection: "column" },
-  textContainerLandscape: {
-    width: "50%",
+  textContainer: {
     flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "flex-start",
-    gap: 10,
+    gap: 12,
+  },
+  textContainerLandscape: {
+    flex: 1,
+    flexDirection: "column",
+    gap: 12,
   },
   title: {
     fontWeight: "bold",
-    fontSize: 18,
-    marginBottom: 8,
+    fontSize: 20,
+    color: "#222",
+  },
+  description: {
+    fontSize: 16,
+    color: "#444",
   },
   price: {
-    textAlign: "right",
-    width: "100%",
+    fontSize: 18,
+    fontWeight: "bold",
+    color: colors.primary,
+  },
+  cartButton: {
+    marginTop: 10,
+    backgroundColor: colors.primary,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+    alignItems: "center",
+  },
+  cartButtonText: {
+    color: "#fff",
     fontWeight: "bold",
     fontSize: 16,
-    marginTop: 10,
   },
-  backButtonContainer: {
-    width: "100%",
-    alignItems: "flex-start",
+  backContainer: {
     padding: 10,
+    alignItems: "flex-start",
+  },
+  backButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+  },
+  backButtonText: {
+    fontSize: 16,
+    color: "#333",
   },
 });

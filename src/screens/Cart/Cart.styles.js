@@ -4,33 +4,47 @@ import { colors } from "../../global/colors";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingBottom: 100,
-    backgroundColor: colors.background,
+    paddingBottom: 10,
+    justifyContent: "space-between",
+    backgroundColor: "#f8f8f8",
   },
   totalContainer: {
     height: 100,
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
     borderTopWidth: 1,
-    borderColor: colors.greyText,
-    paddingHorizontal: 10,
+    borderColor: "#ccc",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
     backgroundColor: "#fff",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  totalInfo: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+    marginBottom: 10,
+  },
+  totalLabel: {
+    fontSize: 18,
+    color: "#555",
+  },
+  totalText: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#111",
   },
   button: {
     backgroundColor: colors.primary,
-    paddingVertical: 10,
+    paddingVertical: 12,
     paddingHorizontal: 20,
-    borderRadius: 10,
+    borderRadius: 12,
+    alignItems: "center",
+    width: "100%",
   },
   buttonText: {
-    color: "white",
-    fontFamily: "Inter",
+    color: "#fff",
     fontSize: 16,
-  },
-  totalText: {
-    fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: "600",
   },
   emptyContainer: {
     flex: 1,
@@ -39,7 +53,7 @@ export const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 18,
-    color: colors.greyText,
+    color: "#999",
     fontFamily: "Inter",
   },
 });

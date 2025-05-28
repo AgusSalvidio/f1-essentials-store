@@ -4,13 +4,14 @@ import {
   View,
   Pressable,
   ActivityIndicator,
-  Alert,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { styles } from "./Cart.styles";
 import CartItem from "../../components/CartItem/CartItem";
 import { usePostOrderMutation } from "../../services/shopServices";
 import { clearCart, removeCartItem } from "../../features/Cart/cartSlice";
+
+import { showAlert, showConfirm } from "../../utils/alerts";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -26,24 +27,17 @@ const Cart = () => {
         total,
       }).unwrap();
       dispatch(clearCart());
-      Alert.alert("Orden confirmada", "Tu compra fue realizada con éxito.");
+      showAlert("Orden confirmada", "Tu compra fue realizada con éxito.");
     } catch (e) {
-      Alert.alert("Error", "Hubo un problema al procesar tu orden.");
+      showAlert("Error", "Hubo un problema al procesar tu orden.");
     }
   };
 
   const handleDeleteItem = (item) => {
-    Alert.alert(
+    showConfirm(
       "Eliminar producto",
-      `¿Estás seguro que querés eliminar "${item.title}" del carrito?`,
-      [
-        { text: "Cancelar", style: "cancel" },
-        {
-          text: "Eliminar",
-          style: "destructive",
-          onPress: () => dispatch(removeCartItem(item)),
-        },
-      ]
+      `¿Querés eliminar "${item.title}" del carrito?`,
+      () => dispatch(removeCartItem(item))
     );
   };
 

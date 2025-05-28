@@ -1,31 +1,47 @@
 import { StyleSheet } from "react-native";
-import { colors } from "../../global/colors";
 
 export const styles = StyleSheet.create({
   card: {
-    height: 100,
-    backgroundColor: colors.lighText,
-    padding: 10,
-    margin: 10,
-    borderRadius: 10,
-    borderWidth: 2,
     flexDirection: "row",
-    justifyContent: "space-between",
     alignItems: "center",
+    padding: 10,
+    marginHorizontal: 12,
+    marginVertical: 6,
+    borderRadius: 12,
+    backgroundColor: "#fff",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  image: {
+    width: 60,
+    height: 60,
+    borderRadius: 8,
+    marginRight: 12,
   },
   textContainer: {
-    width: "70%",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
+    flex: 1,
+    justifyContent: "center",
   },
   text: {
-    fontFamily: "Inter",
-    fontSize: 20,
-    color: colors.primary,
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#333",
   },
   text2: {
-    fontFamily: "Inter",
-    fontSize: 16,
-    color: colors.primary,
+    fontSize: 14,
+    color: "#666",
+  },
+  quantity: {
+    marginTop: 4,
+    fontSize: 14,
+    color: "#444",
+    fontStyle: "italic",
+  },
+  deleteButton: {
+    padding: 8,
+    borderRadius: 8,
   },
 });

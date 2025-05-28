@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     fontFamily: "Inter",
   },
   error: {
-    paddinTop: 2,
+    paddingTop: 2,
     fontSize: 16,
     color: colors.primary,
     fontFamily: "Inter",

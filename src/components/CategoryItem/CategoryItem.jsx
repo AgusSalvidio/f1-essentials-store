@@ -1,4 +1,4 @@
-import { Text, Pressable, View } from "react-native";
+import { Text, Pressable, View, Image } from "react-native";
 import Card from "../Card/Card";
 import { styles } from "./CategoryItem.styles";
 import { useDispatch } from "react-redux";
@@ -8,14 +8,21 @@ const CategoryItem = ({ category, navigation }) => {
   const dispatch = useDispatch();
 
   const goToItemListCategory = () => {
-    dispatch(setCategorySelected(category));
+    dispatch(setCategorySelected(category.name));
     navigation.navigate("ItemListCategory", { category });
   };
 
   return (
-    <Card style={{ marginVertical: 10, marginHorizontal: 10 }}>
-      <Pressable onPress={goToItemListCategory}>
-        <Text style={styles.text}>{category}</Text>
+    <Card style={styles.card}>
+      <Pressable onPress={goToItemListCategory} style={styles.pressable}>
+        <Image
+          source={{ uri: category.image }}
+          style={styles.image}
+          resizeMode="cover"
+        />
+        <View style={styles.textOverlay}>
+          <Text style={styles.text}>{category.name}</Text>
+        </View>
       </Pressable>
     </Card>
   );

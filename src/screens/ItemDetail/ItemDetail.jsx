@@ -1,16 +1,26 @@
-import { Button, Image, Text, View, useWindowDimensions } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  useWindowDimensions,
+  ActivityIndicator,
+  Pressable,
+} from "react-native";
 import { useEffect, useState } from "react";
 import { styles } from "./ItemDetail.styles";
 import { useGetProductByIdQuery } from "../../services/shopServices";
 import { useDispatch } from "react-redux";
 import { addCartItem } from "../../features/Cart/cartSlice";
+import { AntDesign } from "@expo/vector-icons";
 
 const ItemDetail = ({ route, navigation }) => {
   const dispatch = useDispatch();
   const [orientation, setOrientation] = useState("portrait");
+  const [addedToCart, setAddedToCart] = useState(false);
   const { width, height } = useWindowDimensions();
 
   const { productId: idSelected } = route.params;
+
   const {
     data: product,
     error,
@@ -18,25 +28,51 @@ const ItemDetail = ({ route, navigation }) => {
   } = useGetProductByIdQuery(idSelected);
 
   useEffect(() => {
-    if (width > height) setOrientation("landscape");
-    else setOrientation("portrait");
+    setOrientation(width > height ? "landscape" : "portrait");
   }, [width, height]);
 
   const addProductToCart = () => {
-    //implement counter here!
     dispatch(addCartItem({ ...product, quantity: 1 }));
+    setAddedToCart(true);
+    setTimeout(() => setAddedToCart(false), 2000);
   };
+
+  if (isLoading) {
+    return (
+      <View style={[styles.centered, { flex: 1 }]}>
+        <ActivityIndicator size="large" color="#ff6f61" />
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={[styles.centered, { flex: 1 }]}>
+        <Text style={{ color: "red" }}>Error al cargar el producto.</Text>
+        <Pressable
+          onPress={() => navigation.goBack()}
+          style={styles.backButton}
+        >
+          <AntDesign name="arrowleft" size={20} color="#333" />
+          <Text style={styles.backButtonText}>Volver</Text>
+        </Pressable>
+      </View>
+    );
+  }
 
   return (
     <>
-      <View style={styles.backButtonContainer}>
-        <Button
-          title="Volver"
-          color="red"
+      <View style={styles.backContainer}>
+        <Pressable
           onPress={() => navigation.goBack()}
-        />
+          style={styles.backButton}
+        >
+          <AntDesign name="arrowleft" size={20} color="#333" />
+          <Text style={styles.backButtonText}>Volver</Text>
+        </Pressable>
       </View>
-      {product ? (
+
+      {product && (
         <View
           style={
             orientation === "portrait"
@@ -51,6 +87,7 @@ const ItemDetail = ({ route, navigation }) => {
               orientation === "portrait" ? styles.image : styles.imageLandscape
             }
           />
+
           <View
             style={
               orientation === "portrait"
@@ -58,17 +95,25 @@ const ItemDetail = ({ route, navigation }) => {
                 : styles.textContainerLandscape
             }
           >
-            <Text>{product.title}</Text>
-            <Text>{product.description}</Text>
-            <Text style={styles.price}>{product.price}</Text>
-            <Button
-              color="red"
-              title="Agregar al carrito"
+            <Text style={styles.title}>{product.title}</Text>
+            <Text style={styles.description}>{product.description}</Text>
+            <Text style={styles.price}>${product.price}</Text>
+
+            <Pressable
+              style={[
+                styles.cartButton,
+                addedToCart && { backgroundColor: "#4BB543" },
+              ]}
               onPress={addProductToCart}
-            />
+              disabled={addedToCart}
+            >
+              <Text style={styles.cartButtonText}>
+                {addedToCart ? "✔ Agregado" : "Agregar al carrito"}
+              </Text>
+            </Pressable>
           </View>
         </View>
-      ) : null}
+      )}
     </>
   );
 };

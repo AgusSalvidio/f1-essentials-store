@@ -1,4 +1,4 @@
-import { Image, Pressable, Text } from "react-native";
+import { Image, Pressable, Text, View } from "react-native";
 import Card from "../Card/Card";
 import { styles } from "./ProductItem.styles";
 import { useDispatch } from "react-redux";
@@ -13,14 +13,23 @@ const ProductItem = ({ product, navigation }) => {
   };
 
   return (
-    <Card style={styles.additionalStylesCard}>
-      <Pressable style={styles.pressable} onPress={() => goToItemDetail()}>
-        <Text style={styles.textCategory}>{product.title}</Text>
+    <Card style={styles.card}>
+      <Pressable
+        style={styles.pressable}
+        onPress={goToItemDetail}
+        android_ripple={{ color: "#ddd" }}
+      >
         <Image
           resizeMode="cover"
           style={styles.image}
           source={{ uri: product.images[0] }}
         />
+        <View style={styles.textContainer}>
+          <Text numberOfLines={2} ellipsizeMode="tail" style={styles.title}>
+            {product.title}
+          </Text>
+          <Text style={styles.price}>${product.price.toFixed(2)}</Text>
+        </View>
       </Pressable>
     </Card>
   );

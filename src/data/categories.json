@@ -1,1 +1,22 @@
-["shirt", "jacket", "polo", "hoodie", "sweatshirt", "cap"]
+[
+  {
+    "name": "Remera",
+    "image": "https://images.footballfanatics.com/red-bull-racing/red-bull-racing-2025-team-set-up-t-shirt_ss5_p-201493637+u-zcrjb8qxo0imqc69ik1y+v-ihj5khl6e8blltwmuwrk.jpg?_hv=2&w=400"
+  },
+  {
+    "name": "Campera",
+    "image": "https://images.footballfanatics.com/alpine/alpine-f1-team-2025-softshell-jacket_ss5_p-201494920+u-uqxnqfv6aykqdvzxydqr+v-hdxduepohaaewekf2der.jpg?_hv=2&w=400"
+  },
+  {
+    "name": "Chomba",
+    "image": "https://images.footballfanatics.com/scuderia-ferrari/scuderia-ferrari-2025-team-polo_ss5_p-202358990+u-fxubrg39xsm67kgvnyw5+v-r1luv8cfuh1ln50ekeck.jpg?_hv=2&w=400"
+  },
+  {
+    "name": "Buzo",
+    "image": "https://images.footballfanatics.com/mercedes-amg-petronas-f1-team/mercedes-amg-petronas-adidas-f1-2025-team-hoodie-black-kids_ss5_p-202358972+u-oiem3jtclh1xmxtrune0+v-n5ne2tfadullniaibw8i.jpg?_hv=2&w=400"
+  },
+  {
+    "name": "Gorra",
+    "image": "https://images.footballfanatics.com/mclaren-f1-team/mclaren-new-era-lando-norris-9fifty-pre-curved-cap-papaya_ss5_p-202169064+u-zeinjee4oxaefietklv6+v-dnguauzy1q4jsytk6obg.jpg?_hv=2&w=400"
+  }
+]

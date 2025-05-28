@@ -8,15 +8,15 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.primary,
     justifyContent: "center",
     alignItems: "center",
+    position: "relative",
   },
-  text: {
-    color: colors.lighText,
-    fontFamily: "Inter",
-    fontSize: 24,
+  logo: {
+    width: 70,
+    height: 70,
   },
-  textSm: {
-    color: colors.lighText,
-    fontFamily: "Inter",
-    fontSize: 16,
+  profileButton: {
+    position: "absolute",
+    right: 20,
+    top: 20,
   },
 });

@@ -1,4 +1,4 @@
-import { Text, View, Pressable } from "react-native";
+import { Text, View, Pressable, Image } from "react-native";
 import { useState, useEffect } from "react";
 import InputForm from "../../components/InputForm/InputForm";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
@@ -10,12 +10,27 @@ import { useSession } from "../../hooks/useSession";
 
 const LoginScreen = ({ navigation }) => {
   const dispatch = useDispatch();
-  const [triggerSignIn, result] = useSignInMutation();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
   const { insertSession } = useSession();
 
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [formErrors, setFormErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [apiError, setApiError] = useState("");
+
+  const [triggerSignIn, result] = useSignInMutation();
+
   useEffect(() => {
+    if (result.isLoading) {
+      setLoading(true);
+      setApiError("");
+    } else {
+      setLoading(false);
+    }
+
     if (result.isSuccess) {
       (async () => {
         try {
@@ -24,6 +39,7 @@ const LoginScreen = ({ navigation }) => {
             email: result.data.email,
             token: result.data.idToken,
           });
+
           dispatch(
             setUser({
               email: result.data.email,
@@ -32,28 +48,72 @@ const LoginScreen = ({ navigation }) => {
             })
           );
         } catch (err) {
-          console.log(err);
+          setApiError("Error al guardar sesión. Intenta nuevamente.");
         }
       })();
     }
-  }, [result]);
+
+    if (result.isError) {
+      const message =
+        result.error?.data?.error?.message || "Error en el inicio de sesión.";
+      setApiError(message);
+    }
+  }, [result, dispatch, insertSession]);
+
+  const onChange = (field, value) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+    setFormErrors((prev) => ({ ...prev, [field]: "" }));
+    setApiError("");
+  };
+
+  const validate = () => {
+    const errors = {};
+    if (!formData.email) errors.email = "Email es requerido";
+    if (!formData.password) errors.password = "Contraseña es requerida";
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
 
   const onSubmit = () => {
-    triggerSignIn({ email, password });
+    if (!validate()) return;
+    triggerSignIn({ email: formData.email, password: formData.password });
   };
 
   return (
     <View style={styles.main}>
       <View style={styles.container}>
-        <Text style={styles.title}>Inicio de Sesión</Text>
-        <InputForm label={"Email"} onChange={setEmail} error={""} />
-        <InputForm
-          label={"Contraseña"}
-          onChange={setPassword}
-          error={""}
-          isSecure={true}
+        <Image
+          source={require("../../../assets/icon.png")}
+          style={styles.icon}
+          resizeMode="contain"
+          accessible={true}
+          accessibilityLabel="Icono de la aplicación"
         />
-        <SubmitButton onPress={onSubmit} title="Iniciar Sesión" />
+        <Text style={styles.title}>Inicio de Sesión</Text>
+
+        <InputForm
+          label="Email"
+          value={formData.email}
+          onChange={(text) => onChange("email", text)}
+          error={formErrors.email}
+        />
+
+        <InputForm
+          label="Contraseña"
+          value={formData.password}
+          onChange={(text) => onChange("password", text)}
+          error={formErrors.password}
+          isSecure
+        />
+
+        {apiError ? <Text style={styles.apiError}>{apiError}</Text> : null}
+
+        <SubmitButton
+          onPress={onSubmit}
+          title={loading ? "Ingresando..." : "Iniciar Sesión"}
+          disabled={loading}
+        />
+
         <Text style={styles.sub}>¿No tenés una cuenta?</Text>
         <Pressable onPress={() => navigation.navigate("SignUpScreen")}>
           <Text style={styles.subLink}>Registrarse</Text>

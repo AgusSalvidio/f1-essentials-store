@@ -15,9 +15,7 @@ export const styles = StyleSheet.create({
   },
   textContainer: {
     width: "70%",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
+    justifyContent: "center",
   },
   text: {
     fontFamily: "Inter",
@@ -26,7 +24,16 @@ export const styles = StyleSheet.create({
   },
   text2: {
     fontFamily: "Inter",
-    fontSize: 19,
+    fontSize: 16,
     color: colors.lighText,
+    marginLeft: 5,
+  },
+  modifyButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 5,
+  },
+  modifyButtonPressed: {
+    opacity: 0.5,
   },
 });

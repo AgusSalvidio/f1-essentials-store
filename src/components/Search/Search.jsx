@@ -7,25 +7,61 @@ import { styles } from "./Search.styles";
 
 const Search = ({ onSearch = () => {}, error = "", goBack = () => {} }) => {
   const [keyword, setKeyword] = useState("");
+
+  const handleSearch = () => {
+    onSearch(keyword.trim());
+  };
+
+  const handleClear = () => {
+    setKeyword("");
+    onSearch("");
+  };
+
   return (
-    <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder="Search..."
-        value={keyword}
-        onChangeText={setKeyword}
-      />
-      <Pressable onPress={() => onSearch(keyword)}>
-        <FontAwesome name="search" size={24} color="black" />
-      </Pressable>
-      <Pressable onPress={() => setKeyword("")}>
-        <FontAwesome5 name="eraser" size={24} color="black" />
-      </Pressable>
-      <Pressable onPress={goBack}>
-        <AntDesign name="back" size={24} color="black" />
-      </Pressable>
-      {error ? <Text style={{ color: "red" }}>{error}</Text> : null}
-    </View>
+    <>
+      <View style={styles.container}>
+        <Pressable
+          onPress={goBack}
+          style={styles.iconButton}
+          android_ripple={{ color: "#ccc", borderless: true }}
+          accessibilityLabel="Volver"
+        >
+          <AntDesign name="back" size={24} color="#333" />
+        </Pressable>
+
+        <TextInput
+          style={styles.input}
+          placeholder="Buscar productos..."
+          value={keyword}
+          onChangeText={setKeyword}
+          returnKeyType="search"
+          onSubmitEditing={handleSearch}
+          autoCorrect={false}
+          clearButtonMode="while-editing"
+        />
+
+        {keyword.length > 0 && (
+          <Pressable
+            onPress={handleClear}
+            style={styles.iconButton}
+            android_ripple={{ color: "#ccc", borderless: true }}
+            accessibilityLabel="Limpiar búsqueda"
+          >
+            <FontAwesome5 name="eraser" size={22} color="#333" />
+          </Pressable>
+        )}
+
+        <Pressable
+          onPress={handleSearch}
+          style={styles.iconButton}
+          android_ripple={{ color: "#ccc", borderless: true }}
+          accessibilityLabel="Buscar"
+        >
+          <FontAwesome name="search" size={24} color="#333" />
+        </Pressable>
+      </View>
+      {error ? <Text style={styles.error}>{error}</Text> : null}
+    </>
   );
 };
 

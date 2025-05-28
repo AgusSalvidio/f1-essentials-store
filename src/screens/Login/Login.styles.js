@@ -18,6 +18,11 @@ export const styles = StyleSheet.create({
     paddingVertical: 20,
     borderRadius: 10,
   },
+  icon: {
+    width: 100,
+    height: 100,
+    marginBottom: 10,
+  },
   title: {
     fontSize: 22,
     fontFamily: "Inter",
@@ -29,5 +34,13 @@ export const styles = StyleSheet.create({
   subLink: {
     fontSize: 14,
     color: "blue",
+  },
+  apiError: {
+    color: "red",
+    fontFamily: "Inter",
+    fontSize: 14,
+    marginVertical: 5,
+    fontStyle: "italic",
+    textAlign: "center",
   },
 });

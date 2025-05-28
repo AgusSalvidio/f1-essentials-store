@@ -4,9 +4,9 @@ export const styles = StyleSheet.create({
   mapPreview: {
     justifyContent: "center",
     alignItems: "center",
-  },
-  mapImage: {
-    width: 300,
-    height: 300,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 10,
+    backgroundColor: "#f0f0f0",
   },
 });

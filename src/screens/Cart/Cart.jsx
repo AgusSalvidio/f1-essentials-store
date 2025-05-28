@@ -20,8 +20,10 @@ const Cart = () => {
   const [triggerPostOrder, { isLoading }] = usePostOrderMutation();
 
   const onConfirmOrder = async () => {
+    const createdAt = new Date().toISOString();
     try {
       await triggerPostOrder({
+        createdAt,
         items: CartData,
         user: localId,
         total,

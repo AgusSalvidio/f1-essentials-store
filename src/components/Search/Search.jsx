@@ -9,51 +9,59 @@ const Search = ({ onSearch = () => {}, error = "", goBack = () => {} }) => {
   const [keyword, setKeyword] = useState("");
 
   const handleSearch = () => {
-    if (keyword.trim() !== "") {
-      onSearch(keyword.trim());
-    }
+    onSearch(keyword.trim());
   };
 
   const handleClear = () => {
     setKeyword("");
+    onSearch("");
   };
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder="Search..."
-        value={keyword}
-        onChangeText={setKeyword}
-        returnKeyType="search"
-        onSubmitEditing={handleSearch}
-        clearButtonMode="while-editing"
-        autoCorrect={false}
-      />
-      <Pressable
-        onPress={handleSearch}
-        android_ripple={{ color: "#ccc", borderless: true }}
-        accessibilityLabel="Buscar"
-      >
-        <FontAwesome name="search" size={24} color="black" />
-      </Pressable>
-      <Pressable
-        onPress={handleClear}
-        android_ripple={{ color: "#ccc", borderless: true }}
-        accessibilityLabel="Limpiar búsqueda"
-      >
-        <FontAwesome5 name="eraser" size={24} color="black" />
-      </Pressable>
-      <Pressable
-        onPress={goBack}
-        android_ripple={{ color: "#ccc", borderless: true }}
-        accessibilityLabel="Volver"
-      >
-        <AntDesign name="back" size={24} color="black" />
-      </Pressable>
+    <>
+      <View style={styles.container}>
+        <Pressable
+          onPress={goBack}
+          style={styles.iconButton}
+          android_ripple={{ color: "#ccc", borderless: true }}
+          accessibilityLabel="Volver"
+        >
+          <AntDesign name="back" size={24} color="#333" />
+        </Pressable>
 
+        <TextInput
+          style={styles.input}
+          placeholder="Buscar productos..."
+          value={keyword}
+          onChangeText={setKeyword}
+          returnKeyType="search"
+          onSubmitEditing={handleSearch}
+          autoCorrect={false}
+          clearButtonMode="while-editing"
+        />
+
+        {keyword.length > 0 && (
+          <Pressable
+            onPress={handleClear}
+            style={styles.iconButton}
+            android_ripple={{ color: "#ccc", borderless: true }}
+            accessibilityLabel="Limpiar búsqueda"
+          >
+            <FontAwesome5 name="eraser" size={22} color="#333" />
+          </Pressable>
+        )}
+
+        <Pressable
+          onPress={handleSearch}
+          style={styles.iconButton}
+          android_ripple={{ color: "#ccc", borderless: true }}
+          accessibilityLabel="Buscar"
+        >
+          <FontAwesome name="search" size={24} color="#333" />
+        </Pressable>
+      </View>
       {error ? <Text style={styles.error}>{error}</Text> : null}
-    </View>
+    </>
   );
 };
 

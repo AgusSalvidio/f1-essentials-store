@@ -4,10 +4,7 @@ import { colors } from "../../global/colors";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.primary,
-    padding: 10,
-  },
-  listContent: {
-    paddingBottom: 20,
+    backgroundColor: "#f9f9f9",
+    paddingTop: 10,
   },
 });

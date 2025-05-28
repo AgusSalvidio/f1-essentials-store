@@ -2,30 +2,43 @@ import { StyleSheet } from "react-native";
 import { colors } from "../../global/colors";
 
 export const styles = StyleSheet.create({
-  image: {
-    height: 120,
-    width: 100,
-    borderRadius: 8,
-  },
-  additionalStylesCard: {
-    paddingLeft: 10,
+  card: {
     flexDirection: "row",
-    height: 120,
-    width: 300,
-    justifyContent: "space-between",
-    margin: 10,
-  },
-  textCategory: {
-    color: colors.lighText,
-    flex: 1,
-    marginRight: 10,
-    fontSize: 16,
+    marginHorizontal: 12,
+    marginVertical: 8,
+    padding: 12,
+    borderRadius: 14,
+    backgroundColor: "#fff",
+    elevation: 3,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    shadowOffset: { width: 0, height: 3 },
   },
   pressable: {
-    width: "100%",
     flexDirection: "row",
-    justifyContent: "space-between",
     alignItems: "center",
-    paddingLeft: 10,
+    width: "100%",
+  },
+  image: {
+    width: 110,
+    height: 110,
+    borderRadius: 12,
+    marginRight: 15,
+  },
+  textContainer: {
+    flex: 1,
+    justifyContent: "center",
+  },
+  title: {
+    fontSize: 16,
+    color: colors.darkText,
+    fontWeight: "600",
+    marginBottom: 6,
+  },
+  price: {
+    fontSize: 14,
+    color: colors.primary,
+    fontWeight: "700",
   },
 });

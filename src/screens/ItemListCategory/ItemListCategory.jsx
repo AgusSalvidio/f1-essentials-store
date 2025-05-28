@@ -16,7 +16,7 @@ const ItemListCategory = ({ navigation, route }) => {
     data: productFetched = [],
     error: errorFromFetch,
     isLoading,
-  } = useGetProductsByCategoryQuery(categorySelected);
+  } = useGetProductsByCategoryQuery(categorySelected.name);
 
   useEffect(() => {
     const regex = /\d/;
@@ -40,16 +40,16 @@ const ItemListCategory = ({ navigation, route }) => {
 
   if (isLoading) {
     return (
-      <View style={styles.container}>
-        <ActivityIndicator size="large" color="#ff0000" />
+      <View style={[styles.container, { justifyContent: "center" }]}>
+        <ActivityIndicator size="large" color="#666" />
       </View>
     );
   }
 
   if (errorFromFetch) {
     return (
-      <View style={styles.container}>
-        <Text style={{ color: "red", textAlign: "center" }}>
+      <View style={[styles.container, { justifyContent: "center" }]}>
+        <Text style={{ color: "#444", textAlign: "center" }}>
           Error cargando productos.
         </Text>
       </View>
@@ -63,13 +63,14 @@ const ItemListCategory = ({ navigation, route }) => {
         onSearch={setKeyword}
         goBack={() => navigation.goBack()}
       />
+
       {productsFiltered.length === 0 && !error ? (
-        <Text style={{ textAlign: "center", marginTop: 20 }}>
+        <Text style={{ textAlign: "center", marginTop: 20, color: "#666" }}>
           No se encontraron productos.
         </Text>
       ) : (
         <FlatList
-          contentContainerStyle={styles.listContent}
+          contentContainerStyle={{ paddingBottom: 20 }}
           data={productsFiltered}
           renderItem={({ item }) => (
             <ProductItem product={item} navigation={navigation} />

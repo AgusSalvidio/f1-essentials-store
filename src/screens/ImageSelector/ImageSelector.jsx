@@ -1,18 +1,23 @@
-import { Button, Text, View, Image, ActivityIndicator } from "react-native";
+import {
+  Text,
+  View,
+  Image,
+  ActivityIndicator,
+  TouchableOpacity,
+} from "react-native";
 import { useState } from "react";
 import * as ImagePicker from "expo-image-picker";
-
+import Feather from "@expo/vector-icons/Feather";
 import { useDispatch, useSelector } from "react-redux";
 import { setCameraImage } from "../../features/User/userSlice";
 import { usePostProfileImageMutation } from "../../services/shopServices";
 import { styles } from "./ImageSelector.styles";
-
 import { showAlert } from "../../utils/alerts";
 
 const ImageSelector = ({ navigation }) => {
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [triggerPostImage, result] = usePostProfileImageMutation();
+  const [triggerPostImage] = usePostProfileImageMutation();
   const { localId } = useSelector((state) => state.auth.value);
   const dispatch = useDispatch();
 
@@ -23,107 +28,98 @@ const ImageSelector = ({ navigation }) => {
 
   const pickImageFromCamera = async () => {
     try {
-      const permissionCamera = await verifyCameraPermissions();
-      if (!permissionCamera) {
-        showAlert(
-          "Permiso denegado",
-          "Necesitamos acceso a la cámara para tomar fotos."
-        );
+      const permission = await verifyCameraPermissions();
+      if (!permission) {
+        showAlert("Permiso denegado", "Se requiere acceso a la cámara.");
         return;
       }
-      let result = await ImagePicker.launchCameraAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      const result = await ImagePicker.launchCameraAsync({
         allowsEditing: true,
         aspect: [1, 1],
         base64: true,
         quality: 0.2,
       });
-
       if (!result.canceled) {
         const img = `data:image/jpeg;base64,${result.assets[0].base64}`;
         setImage(img);
       }
     } catch (error) {
       console.log(error);
-      showAlert("Error", "Ocurrió un error al tomar la foto.");
+      showAlert("Error", "No se pudo tomar la foto.");
     }
   };
 
   const pickImageFromGallery = async () => {
     try {
-      let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      const result = await ImagePicker.launchImageLibraryAsync({
         allowsEditing: true,
         aspect: [1, 1],
         base64: true,
         quality: 0.2,
       });
-
       if (!result.canceled) {
         const img = `data:image/jpeg;base64,${result.assets[0].base64}`;
         setImage(img);
       }
     } catch (error) {
       console.log(error);
-      showAlert("Error", "Ocurrió un error al seleccionar la foto.");
+      showAlert("Error", "No se pudo seleccionar la foto.");
     }
   };
 
   const confirmImage = async () => {
     if (!image) return;
-    setLoading(true);
     try {
+      setLoading(true);
       dispatch(setCameraImage(image));
-      const response = await triggerPostImage({ image, localId }).unwrap();
-      setLoading(false);
-      showAlert("Éxito", "Foto subida correctamente.");
+      await triggerPostImage({ image, localId }).unwrap();
+      showAlert("Éxito", "Foto de perfil actualizada.");
       navigation.goBack();
-    } catch (error) {
+    } catch (err) {
+      console.log(err);
+      showAlert("Error", "No se pudo subir la foto.");
+    } finally {
       setLoading(false);
-      console.log(error);
-      showAlert("Error", "No se pudo subir la foto. Intenta nuevamente.");
     }
   };
 
   return (
     <View style={styles.container}>
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => navigation.goBack()}
+      >
+        <Feather name="chevron-left" size={24} color="#333" />
+        <Text style={styles.backText}>Volver</Text>
+      </TouchableOpacity>
+
       {image ? (
         <>
           <Image source={{ uri: image }} style={styles.image} />
-          <View style={{ marginVertical: 10, width: "80%" }}>
-            <Button
-              color="red"
-              title="Sacar otra foto"
-              onPress={pickImageFromCamera}
-            />
-          </View>
-          <View style={{ marginVertical: 10, width: "80%" }}>
-            <Button
-              color="red"
-              title="Confirmar foto"
-              onPress={confirmImage}
-              disabled={loading}
-            />
-          </View>
+          <TouchableOpacity style={styles.button} onPress={pickImageFromCamera}>
+            <Text style={styles.buttonText}>Sacar otra foto</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.button, loading && { opacity: 0.5 }]}
+            onPress={confirmImage}
+            disabled={loading}
+          >
+            <Text style={styles.buttonText}>Confirmar foto</Text>
+          </TouchableOpacity>
           {loading && <ActivityIndicator size="large" color="red" />}
         </>
       ) : (
         <View style={styles.noPhotoContainer}>
-          <Text>No hay foto para mostrar</Text>
-          <View style={{ marginVertical: 10, width: "80%" }}>
-            <Button
-              color="red"
-              title="Sacar una foto"
-              onPress={pickImageFromCamera}
-            />
-          </View>
-          <View style={{ marginVertical: 10, width: "80%" }}>
-            <Button
-              color="red"
-              title="Elegir de galería"
-              onPress={pickImageFromGallery}
-            />
-          </View>
+          <Text style={styles.noPhotoText}>No hay foto para mostrar</Text>
+          <TouchableOpacity style={styles.button} onPress={pickImageFromCamera}>
+            <Text style={styles.buttonText}>Sacar una foto</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={pickImageFromGallery}
+          >
+            <Text style={styles.buttonText}>Elegir de galería</Text>
+          </TouchableOpacity>
         </View>
       )}
     </View>

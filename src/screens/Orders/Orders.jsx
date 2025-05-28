@@ -1,30 +1,58 @@
-import { FlatList, View } from "react-native";
+import { FlatList, View, Text, ActivityIndicator } from "react-native";
 import OrderItem from "../../components/OrderItem/OrderItem";
-import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useGetOrdersQuery } from "../../services/shopServices";
+import { useMemo } from "react";
+import { styles } from "./Orders.styles";
 
 const Orders = () => {
   const { localId } = useSelector((state) => state.auth.value);
-  const { data: orders, isSuccess } = useGetOrdersQuery();
-  const [ordersFiltered, setOrdersFiltered] = useState();
-  useEffect(() => {
-    if (isSuccess) {
-      const responseTransformed = Object.values(orders);
-      const ordersToFilter = responseTransformed.filter(
-        (order) => order.user === localId
-      );
-      setOrdersFiltered(ordersToFilter);
-    }
-  }, [orders, isSuccess, localId]);
+  const {
+    data: orders,
+    isLoading,
+    isError,
+    error,
+    isFetching,
+  } = useGetOrdersQuery();
+
+  const ordersFiltered = useMemo(() => {
+    if (!orders) return [];
+    return Object.values(orders).filter((order) => order.user === localId);
+  }, [orders, localId]);
+
+  if (isLoading || isFetching) {
+    return (
+      <View style={styles.center}>
+        <ActivityIndicator size="large" color="gray" />
+      </View>
+    );
+  }
+
+  if (isError) {
+    return (
+      <View style={styles.center}>
+        <Text style={styles.errorText}>
+          Error cargando órdenes: {error?.message || "Intenta de nuevo"}
+        </Text>
+      </View>
+    );
+  }
+
+  if (ordersFiltered.length === 0) {
+    return (
+      <View style={styles.center}>
+        <Text>No tienes órdenes registradas.</Text>
+      </View>
+    );
+  }
 
   return (
-    <View>
+    <View style={styles.container}>
       <FlatList
         data={ordersFiltered}
-        renderItem={({ item }) => {
-          return <OrderItem order={item} />;
-        }}
+        keyExtractor={(item) => item.id || item.localId || item.user}
+        renderItem={({ item }) => <OrderItem order={item} />}
+        contentContainerStyle={styles.listContent}
       />
     </View>
   );

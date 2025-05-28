@@ -42,7 +42,7 @@ const Home = ({ route, navigation }) => {
         renderItem={({ item }) => (
           <CategoryItem category={item} navigation={navigation} />
         )}
-        keyExtractor={(itemElement) => itemElement}
+        keyExtractor={(item, index) => index.toString()}
         numColumns={2}
         columnWrapperStyle={styles.row}
         contentContainerStyle={styles.listContent}

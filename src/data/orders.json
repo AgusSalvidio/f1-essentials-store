@@ -8,7 +8,7 @@
         "id": 1,
         "title": "Red Bull Racing Team T-Shirt",
         "description": "Official Red Bull Racing team shirt featuring performance fabric and modern fit. Ideal for fans and motorsport enthusiasts.",
-        "category": "shirt",
+        "category": "Remera",
         "price": 59.99,
         "stock": {
           "S": 12,
@@ -29,7 +29,7 @@
         "id": 2,
         "title": "Mercedes-AMG Petronas Hoodie",
         "description": "Comfortable and stylish hoodie featuring the iconic Mercedes-AMG Petronas branding. A must-have for fans.",
-        "category": "hoodie",
+        "category": "Buzo",
         "price": 84.99,
         "stock": {
           "S": 9,

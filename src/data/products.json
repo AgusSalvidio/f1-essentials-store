@@ -3,7 +3,7 @@
     "id": 1,
     "title": "Red Bull Racing Team T-Shirt",
     "description": "Official Red Bull Racing team shirt featuring performance fabric and modern fit. Ideal for fans and motorsport enthusiasts.",
-    "category": "shirt",
+    "category": "Remera",
     "price": 59.99,
     "stock": {
       "S": 12,
@@ -23,7 +23,7 @@
     "id": 2,
     "title": "Mercedes-AMG Petronas Hoodie",
     "description": "Comfortable and stylish hoodie featuring the iconic Mercedes-AMG Petronas branding. A must-have for fans.",
-    "category": "hoodie",
+    "category": "Buzo",
     "price": 84.99,
     "stock": {
       "S": 9,
@@ -43,7 +43,7 @@
     "id": 3,
     "title": "Ferrari Team Polo",
     "description": "Elegant Scuderia Ferrari polo shirt with official logos and Italian design flair. Perfect for any F1 occasion.",
-    "category": "polo",
+    "category": "Chomba",
     "price": 74.99,
     "stock": {
       "S": 10,
@@ -63,7 +63,7 @@
     "id": 4,
     "title": "McLaren Team Cap",
     "description": "Lightweight and adjustable cap with McLaren team colors and sponsor details. Great for sunny race days.",
-    "category": "cap",
+    "category": "Gorra",
     "price": 34.99,
     "stock": {
       "S": 0,
@@ -83,7 +83,7 @@
     "id": 5,
     "title": "Aston Martin F1 Sweatshirt",
     "description": "Stylish sweatshirt with the Aston Martin Aramco team crest. Ideal for layering and everyday wear.",
-    "category": "sweatshirt",
+    "category": "Buzo",
     "price": 79.99,
     "stock": {
       "S": 8,
@@ -103,7 +103,7 @@
     "id": 6,
     "title": "Alpine Team Jacket",
     "description": "Durable and sleek team jacket used by the BWT Alpine F1 Team. Great for cold-weather support.",
-    "category": "jacket",
+    "category": "Campera",
     "price": 129.99,
     "stock": {
       "S": 5,
@@ -123,7 +123,7 @@
     "id": 7,
     "title": "Williams Racing T-Shirt",
     "description": "Official team shirt of Williams Racing with minimalist style and breathable material.",
-    "category": "shirt",
+    "category": "Remera",
     "price": 49.99,
     "stock": {
       "S": 11,
@@ -143,7 +143,7 @@
     "id": 8,
     "title": "Stake F1 Team Hoodie",
     "description": "Premium hoodie from the Stake F1 Team with modern fit and soft interior fleece lining.",
-    "category": "hoodie",
+    "category": "Buzo",
     "price": 69.99,
     "stock": {
       "S": 7,
@@ -163,7 +163,7 @@
     "id": 9,
     "title": "Visa Cash App RB Polo Shirt",
     "description": "Official RB polo shirt with clean lines and sponsor branding, worn by team personnel during race weekends.",
-    "category": "polo",
+    "category": "Chomba",
     "price": 64.99,
     "stock": {
       "S": 10,
@@ -183,7 +183,7 @@
     "id": 10,
     "title": "Haas F1 Team Softshell Jacket",
     "description": "Protective and stylish softshell jacket from the MoneyGram Haas F1 Team. Perfect for windy conditions.",
-    "category": "jacket",
+    "category": "Campera",
     "price": 99.99,
     "stock": {
       "S": 6,

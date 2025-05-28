@@ -10,7 +10,4 @@ export const styles = StyleSheet.create({
   listContent: {
     paddingBottom: 20,
   },
-  row: {
-    justifyContent: "space-between",
-  },
 });

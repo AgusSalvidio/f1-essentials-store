@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import { colors } from "../../global/colors";
 
 export const styles = StyleSheet.create({
   mainContainer: {
@@ -28,11 +27,21 @@ export const styles = StyleSheet.create({
     width: "50%",
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "start",
+    alignItems: "flex-start",
     gap: 10,
   },
-  price: { textAlign: "right", width: "100%" },
-  button: { backgroundColor: colors.primary },
+  title: {
+    fontWeight: "bold",
+    fontSize: 18,
+    marginBottom: 8,
+  },
+  price: {
+    textAlign: "right",
+    width: "100%",
+    fontWeight: "bold",
+    fontSize: 16,
+    marginTop: 10,
+  },
   backButtonContainer: {
     width: "100%",
     alignItems: "flex-start",

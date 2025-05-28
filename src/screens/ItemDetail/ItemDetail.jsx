@@ -1,4 +1,12 @@
-import { Button, Image, Text, View, useWindowDimensions } from "react-native";
+import {
+  Button,
+  Image,
+  Text,
+  View,
+  useWindowDimensions,
+  ActivityIndicator,
+  Alert,
+} from "react-native";
 import { useEffect, useState } from "react";
 import { styles } from "./ItemDetail.styles";
 import { useGetProductByIdQuery } from "../../services/shopServices";
@@ -23,9 +31,43 @@ const ItemDetail = ({ route, navigation }) => {
   }, [width, height]);
 
   const addProductToCart = () => {
-    //implement counter here!
     dispatch(addCartItem({ ...product, quantity: 1 }));
+    Alert.alert(
+      "Producto agregado",
+      `${product.title} fue agregado al carrito.`
+    );
   };
+
+  if (isLoading) {
+    return (
+      <View
+        style={[
+          styles.mainContainer,
+          { justifyContent: "center", alignItems: "center", flex: 1 },
+        ]}
+      >
+        <ActivityIndicator size="large" color="red" />
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View
+        style={[
+          styles.mainContainer,
+          { justifyContent: "center", alignItems: "center", flex: 1 },
+        ]}
+      >
+        <Text style={{ color: "red" }}>Error al cargar el producto.</Text>
+        <Button
+          title="Volver"
+          color="red"
+          onPress={() => navigation.goBack()}
+        />
+      </View>
+    );
+  }
 
   return (
     <>
@@ -36,6 +78,7 @@ const ItemDetail = ({ route, navigation }) => {
           onPress={() => navigation.goBack()}
         />
       </View>
+
       {product ? (
         <View
           style={
@@ -44,13 +87,18 @@ const ItemDetail = ({ route, navigation }) => {
               : styles.mainContainerLandscape
           }
         >
-          <Image
-            source={{ uri: product.images[0] }}
-            resizeMode="contain"
-            style={
-              orientation === "portrait" ? styles.image : styles.imageLandscape
-            }
-          />
+          {product.images && product.images.length > 0 && (
+            <Image
+              source={{ uri: product.images[0] }}
+              resizeMode="contain"
+              style={
+                orientation === "portrait"
+                  ? styles.image
+                  : styles.imageLandscape
+              }
+            />
+          )}
+
           <View
             style={
               orientation === "portrait"
@@ -58,14 +106,16 @@ const ItemDetail = ({ route, navigation }) => {
                 : styles.textContainerLandscape
             }
           >
-            <Text>{product.title}</Text>
+            <Text style={styles.title}>{product.title}</Text>
             <Text>{product.description}</Text>
-            <Text style={styles.price}>{product.price}</Text>
-            <Button
-              color="red"
-              title="Agregar al carrito"
-              onPress={addProductToCart}
-            />
+            <Text style={styles.price}>${product.price}</Text>
+            <View style={{ marginTop: 10 }}>
+              <Button
+                color="red"
+                title="Agregar al carrito"
+                onPress={addProductToCart}
+              />
+            </View>
           </View>
         </View>
       ) : null}

@@ -16,4 +16,9 @@ export const styles = StyleSheet.create({
     color: "red",
     fontSize: 16,
   },
+  emptyText: {
+    fontSize: 18,
+    color: "#999",
+    fontFamily: "Inter",
+  },
 });

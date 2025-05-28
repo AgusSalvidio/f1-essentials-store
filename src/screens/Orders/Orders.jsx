@@ -4,8 +4,10 @@ import { useSelector } from "react-redux";
 import { useGetOrdersQuery } from "../../services/shopServices";
 import { useMemo } from "react";
 import { styles } from "./Orders.styles";
+import { useNavigation } from "@react-navigation/native";
 
 const Orders = () => {
+  const navigation = useNavigation();
   const { localId } = useSelector((state) => state.auth.value);
   const {
     data: orders,
@@ -19,6 +21,10 @@ const Orders = () => {
     if (!orders) return [];
     return Object.values(orders).filter((order) => order.user === localId);
   }, [orders, localId]);
+
+  const handleOrderPress = (order) => {
+    navigation.navigate("OrderDetail", { order });
+  };
 
   if (isLoading || isFetching) {
     return (
@@ -41,7 +47,7 @@ const Orders = () => {
   if (ordersFiltered.length === 0) {
     return (
       <View style={styles.center}>
-        <Text>No tienes órdenes registradas.</Text>
+        <Text style={styles.emptyText}>No tienes órdenes registradas.</Text>
       </View>
     );
   }
@@ -51,7 +57,9 @@ const Orders = () => {
       <FlatList
         data={ordersFiltered}
         keyExtractor={(item) => item.id || item.localId || item.user}
-        renderItem={({ item }) => <OrderItem order={item} />}
+        renderItem={({ item }) => (
+          <OrderItem order={item} onPress={() => handleOrderPress(item)} />
+        )}
         contentContainerStyle={styles.listContent}
       />
     </View>

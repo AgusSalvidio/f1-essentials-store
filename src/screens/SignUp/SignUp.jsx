@@ -3,16 +3,12 @@ import { useEffect, useState } from "react";
 
 import InputForm from "../../components/InputForm/InputForm";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
-
-import { useDispatch } from "react-redux";
 import { useSignUpMutation } from "../../services/authService";
 import { signupSchema } from "../../validations/authSchema";
-import { setUser } from "../../features/User/userSlice";
 import { styles } from "./SignUp.styles";
+import { showAlert } from "../../utils/alerts";
 
 const SignUp = ({ navigation }) => {
-  const dispatch = useDispatch();
-
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -34,15 +30,14 @@ const SignUp = ({ navigation }) => {
     }
 
     if (result.isSuccess) {
-      dispatch(
-        setUser({
-          email: result.data.email,
-          idToken: result.data.idToken,
-          localId: result.data.localId,
-        })
-      );
       setFormData({ email: "", password: "", confirmPassword: "" });
       setFormErrors({});
+
+      showAlert(
+        "Registro exitoso",
+        "Tu cuenta fue creada correctamente. Por favor inicia sesión.",
+        () => navigation.navigate("LoginScreen")
+      );
     }
 
     if (result.isError) {
@@ -51,7 +46,7 @@ const SignUp = ({ navigation }) => {
         "Error en el registro. Intenta de nuevo.";
       setApiError(message);
     }
-  }, [result, dispatch]);
+  }, [result, navigation]);
 
   const onChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
